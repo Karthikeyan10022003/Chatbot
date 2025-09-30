@@ -16,7 +16,7 @@ import { API_ENDPOINTS } from '../lib/constants';
 
 class TaskService {
   // Only use mock data if we're in development AND no API URL is provided
-  private useMockData = process.env.NODE_ENV === 'development' && !process.env.NEXT_PUBLIC_API_URL;
+  private useMockData = false;
 
   async getTasks(filters?: TaskFilters): Promise<ApiResponse<Task[]>> {
     try {

@@ -67,7 +67,7 @@ export const useChatViewModel = (): ChatViewModel => {
         const agentMessage: ChatMessage = {
           id: generateId(),
           type: 'agent',
-          content: response,
+          content: typeof wsMessage === 'string' ? wsMessage : wsMessage.payload?.response || wsMessage.payload?.message || '',
           timestamp: new Date().toISOString()
         };
 

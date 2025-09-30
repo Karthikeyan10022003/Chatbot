@@ -12,7 +12,7 @@ export const API_ENDPOINTS = {
   CHAT: '/api/chat',
   
   // WebSocket endpoint
-  WS: process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000/ws',
+  WS: process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000/ws/chat',
 };
 
 // Default Messages

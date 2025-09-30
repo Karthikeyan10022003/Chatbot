@@ -113,12 +113,18 @@ class WebSocketService {
   // Handle WebSocket message event
   private handleMessage(event: MessageEvent): void {
     try {
-      const data = JSON.parse(event.data) as WebSocketMessage;
-      console.log('WebSocket message received:', data);
-      
+        const data = event.data;
+    console.log('WebSocket message received:', data);
+    const wrappedMessage: WebSocketMessage = {
+      type: 'chat',
+      payload: {
+        response: data,
+        actions: [] // Parse actions if needed
+      }
+    };
       // Notify all listeners
       this.messageListeners.forEach(listener => {
-        listener(data);
+        listener(wrappedMessage);
       });
     } catch (error) {
       console.error('Error parsing WebSocket message:', error);

@@ -30,6 +30,9 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onToggleStatus, onDele
   const isCompleted = task.status === 'completed';
   const taskOverdue = !isCompleted && isOverdue(task.due_date);
   const daysUntilDue = getDaysUntilDue(task.due_date);
+  const validPriority = ['high', 'medium', 'low'].includes(task.priority) 
+    ? task.priority 
+    : 'medium';
 
   // Priority styling
   const priorityStyles = {
@@ -49,6 +52,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onToggleStatus, onDele
       border: 'border-green-200 dark:border-green-800/30'
     }
   };
+  const currentPriorityStyle = priorityStyles[validPriority as 'high' | 'medium' | 'low'];
 
   // Handle task status toggle
   const handleToggleStatus = () => {
@@ -113,12 +117,12 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onToggleStatus, onDele
               <div className="ml-2 flex-shrink-0">
                 <span className={cn(
                   "inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium",
-                  priorityStyles[task.priority].bg,
-                  priorityStyles[task.priority].text,
-                  "border",
-                  priorityStyles[task.priority].border
+                 currentPriorityStyle.bg,
+    currentPriorityStyle.text,
+    "border",
+    currentPriorityStyle.border
                 )}>
-                  {task.priority}
+                  {validPriority}
                 </span>
               </div>
             </div>
